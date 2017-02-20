@@ -5,7 +5,7 @@ import {MyEvent} from "./event";
 export class AppService {
 
   static allevents: MyEvent[] = [];
-
+  static assignID = -1;
 
   setItems(id: number, ti: string, da: Date, des: string, pr: number): boolean {
     let currentEvent: MyEvent = new MyEvent();
