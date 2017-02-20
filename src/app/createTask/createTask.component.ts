@@ -18,7 +18,7 @@ export class createTaskComponent implements OnInit {
   isUpdated: Boolean = false;
   btnName: string = "CreateTask";
   isSave: boolean = false;
-
+  temid = 0;
   constructor(private router: Router, private route: ActivatedRoute, private service: AppService) {
   }
 
@@ -27,8 +27,8 @@ export class createTaskComponent implements OnInit {
     this.route.params.subscribe((paraEvent: any) => {
       if (paraEvent.id >= 0) {
         if (paraEvent) {
-          this.id = paraEvent.id;
-          let toEditItem = this.service.getItems().filter(x => x.id == this.id);
+          this.temid = paraEvent.id;
+          let toEditItem = this.service.getItems().filter(x => x.id == this.temid);
           this.title = toEditItem[0].title;
           this.date = toEditItem[0].date;
           this.des = toEditItem[0].description;
@@ -45,7 +45,7 @@ export class createTaskComponent implements OnInit {
 
     if (this.isSave == true) {
 
-      if (this.service.updateItems(this.id, this.title, this.date, this.des, this.pri)) {
+      if (this.service.updateItems(AppService.assignID++, this.title, this.date, this.des, this.pri)) {
 
         this.isUpdated = true;
 
@@ -59,7 +59,8 @@ export class createTaskComponent implements OnInit {
 
     }
     else {
-      this.id++;
+      let latestId= ++AppService.assignID;
+      this.id = latestId;
       this.title = form.title;
       this.date = form.date;
       this.des = form.description;
