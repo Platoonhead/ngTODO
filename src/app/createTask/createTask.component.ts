@@ -45,7 +45,7 @@ export class createTaskComponent implements OnInit {
 
     if (this.isSave == true) {
 
-      if (this.service.updateItems(AppService.assignID++, this.title, this.date, this.des, this.pri)) {
+      if (this.service.updateItems(this.temid, this.title, this.date, this.des, this.pri)) {
 
         this.isUpdated = true;
 
